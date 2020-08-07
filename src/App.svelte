@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 	export let name;
 </script>
 
@@ -28,4 +28,9 @@
 			max-width: none;
 		}
 	}
-</style>
+</style> -->
+
+<script>
+    import Todos from './Todos.svelte'
+</script>
+<Todos />
