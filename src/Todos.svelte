@@ -1,5 +1,5 @@
 <script>
-    import TodoItem from '.TodoItem.svelte';
+    import TodoItem from './TodoItem.svelte';
     let newTodoTitle ='';
     let currentFilter = 'all';
     let nextId = 4;
@@ -23,48 +23,48 @@
     ];
 
     function addTodo(event) {
-    if (event.key === 'Enter') {
-        todos = [...todos, {
-            id: nextId,
-            completed: false,
-            title: newTodoTitle
-        }];
-        nextId = nextId + 1;
-        newTodoTitle = '';
+        if (event.key === 'Enter') {
+            todos = [...todos, {
+                id: nextId,
+                completed: false,
+                title: newTodoTitle
+            }];
+            nextId = nextId + 1;
+            newTodoTitle = '';
+        }
     }
-}
 
-$: todosRemaining = filteredTodos.filter(todo => !todo.completed).length;
-$: filteredTodos = currentFilter === 'all' ? todos : currentFilter === 'completed' 
-    ? todos.filter(todo => todo.completed)
-    : todos.filter(todo => !todo.completed)
+    $: todosRemaining = filteredTodos.filter(todo => !todo.completed).length;
+    $: filteredTodos = currentFilter === 'all' ? todos : currentFilter === 'completed' 
+        ? todos.filter(todo => todo.completed)
+        : todos.filter(todo => !todo.completed)
 
-function checkAllTodos(event) {
-    todos.forEach(todo => todo.completed = event.target.checked);
-    todos = todos;
-}
+    function checkAllTodos(event) {
+        todos.forEach(todo => todo.completed = event.target.checked);
+        todos = todos;
+    }
 
-function updateFilter(newFilter) {
-    currentFilter = newFilter;
-}
+    function updateFilter(newFilter) {
+        currentFilter = newFilter;
+    }
 
-function clearCompleted() {
-    todos = todos.filter(todo => !todo.completed);
-}
+    function clearCompleted() {
+        todos = todos.filter(todo => !todo.completed);
+    }
 
-function handleDeleteTodo(event) {
-    todos = todos.filter(todo => todo.id !== event.detail.id);
-}
+    function handleDeleteTodo(event) {
+        todos = todos.filter(todo => todo.id !== event.detail.id);
+    }
 
-function handleToggleComplete(event) {
-    const todoIndex = todos.findIndex(todo => todo.id === event.detail.id);
-    const updatedTodo = { ...todos[todoIndex], completed: !todos[todoIndex].completed};
-    todos = [
-        ...todos.slice(0, todoIndex),
-        updatedTodo,
-        ...todos.slice(todoIndex + 1),
-    ];
-}
+    function handleToggleComplete(event) {
+        const todoIndex = todos.findIndex(todo => todo.id === event.detail.id);
+        const updatedTodo = { ...todos[todoIndex], completed: !todos[todoIndex].completed};
+        todos = [
+            ...todos.slice(0, todoIndex),
+            updatedTodo,
+            ...todos.slice(todoIndex + 1),
+        ];
+    }
 
 </script>
 
