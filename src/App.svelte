@@ -31,6 +31,8 @@
 </style> -->
 
 <script>
-    import Todos from './Todos.svelte'
+	import Todos from './Todos.svelte';
+	import WhiteNoise from './WhiteNoise.svelte'
 </script>
 <Todos />
+<WhiteNoise />
